@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+<!DOCTYPE html>
+{% load static %}
+{% block content %}
+    <head>
+
+        <title>profile - badreads</title>
+        <script src="{% static 'js/profile.js' %}" type="module"></script>
+    </head>
+
+    <body>
+    
+      {% if user.is_authenticated %}
+        <div class="topnav">
+          <a  href="{% url 'home' %}"id="index">badreads</a>
+          <a href="{% url 'logout' %}" id="author_name" value="{{user.get_username}}">logout</a>
+          <a href="{% url 'signup' %}">signup</a>
+          <a class='active' href="{% url 'profile' %}"id="profile">profile</a>
+        </div>
+      {% else %}
+      <div class="topnav">
+        <a href="{% url 'home' %}"id="index">badreads</a>
+        <a  href="{% url 'login' %}">login</a>
+        <a href="{% url 'signup' %}">signup</a>
+        <a class='active' href="{% url 'profile' %}"id="profile">profile</a>
+      </div>
+      {% endif %}
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap" rel="stylesheet">
+      {% if user.is_authenticated %}
+        <h1> Hi {{ user.username }}! </h1>
+        {% else %}
+       <h1> Please login/ sign up to see your reveiwed books! </h1> 
+      {% endif %}
+      <div class="idk">
+              <h2>your reviewed books:</h2>
+      </div>
+    <div class="append"></div>
+    </body>
+{% endblock %}
+</html> 

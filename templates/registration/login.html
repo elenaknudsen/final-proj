@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+
+    <head>
+<title>login</title>
+        <link rel="stylesheet" href="{% static 'css/page.css' %}">
+
+    </head>
+{% block content %}
+    <body>
+     {% if user.is_authenticated %}
+        <div class="topnav">
+        
+          <a href="{% url 'home' %}"id="index">badreads</a>
+          <a class='active'  href="{% url 'logout' %}" id="author_name" value="{{user.get_username}}">logout</a>
+          <a href="{% url 'signup' %}">signup</a>
+          <a href="{% url 'profile' %}"id="profile">profile</a>
+         <h1>  Hi {{ user.username }}! You are already logged in! </h1>
+        </div>
+      {% else %}
+      <div class="topnav">
+        <a  href="{% url 'home' %}"id="index">badreads</a>
+        <a  class='active'href="{% url 'login' %}">login</a>
+        <a href="{% url 'signup' %}">signup</a>
+        <a href="{% url 'profile' %}"id="profile">profile</a>
+      
+      </div>
+        <h1 id="login">login</h1>
+    <!-- The form -->
+       <div class="idk">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                  <button id="logsub" type="submit">Log In</button>
+            </form>
+        </div>
+       
+
+      {% endif %}
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap" rel="stylesheet">
+
+   
+  
+    </body>
+{% endblock %}
+</html> 
